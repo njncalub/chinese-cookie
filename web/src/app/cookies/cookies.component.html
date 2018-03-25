@@ -1,0 +1,9 @@
+<div id="fortune" *ngIf="showMessage">
+  <textarea id="txtMessage" disabled [disabled]="!isMessageEditable()" [(ngModel)]="selectedFortune.message"></textarea>
+  <div class="toolbar">
+    <button class="clear" id="btnSave" disabled [disabled]="!isMessageSavable()" (click)="onSaveClick()">Save</button>
+    <button class="clear" id="btnChange" disabled [disabled]="!isMessageLoaded()" (click)="onChangeClick()">{{changeText}}</button>
+  </div>
+</div>
+
+<img id="imgCookie" width="300" alt="Closed Cookie" src="/assets/images/closed-cookie.png" [src]="cookieImage" (click)="onCookieClick()">
