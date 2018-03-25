@@ -2,7 +2,8 @@
 Fortune cookie generator.
 
 ### Requirements
-* Python 3.5+ (For API Star)
+* Python >=3.5.x (For API Star)
+* Node >=6.9.x and NPM >=3.x.x (For Angular CLI)
 
 ### Run API Backend (Development)
 ```
@@ -19,6 +20,17 @@ apistar load_fortunes fixtures/fortunes.txt
 
 # run the server
 apistar run
+```
+
+### Run Web App (Development)
+```
+cd <project directory>/web
+
+# install the requirements
+npm install
+
+# run the server
+ng serve
 ```
 
 ### Licensing
