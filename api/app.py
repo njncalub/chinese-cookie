@@ -1,31 +1,38 @@
 from apistar import Include
 from apistar.backends import sqlalchemy_backend
-from apistar.frameworks.wsgi import WSGIApp as App
+from apistar.frameworks.wsgi import WSGIApp
 
+from apistar_cors import CORSMixin
 from sqlalchemy import Column, Integer, String
 
 from cookies.models import Base
 
 from commands import commands as custom_commands
-from urls import routes
+from urls import routes as app_routes
 
 
-settings = {
+class App(CORSMixin, WSGIApp):
+    pass
+
+
+ROUTES = app_routes
+
+SETTINGS = {
     'DATABASE': {
-        'URL': 'sqlite:///db.sqlite3',
+        'URL': 'sqlite:///db.sqlite3',  # TODO: use env variable
         'METADATA': Base.metadata
     }
 }
 
-commands = sqlalchemy_backend.commands + custom_commands
+COMMANDS = sqlalchemy_backend.commands + custom_commands
 
-components = sqlalchemy_backend.components
+COMPONENTS = sqlalchemy_backend.components
 
 app = App(
-    routes=routes,
-    settings=settings,
-    commands=commands,
-    components=components
+    routes=ROUTES,
+    settings=SETTINGS,
+    commands=COMMANDS,
+    components=COMPONENTS
 )
 
 if __name__ == '__main__':
