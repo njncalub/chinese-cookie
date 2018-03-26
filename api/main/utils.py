@@ -1,7 +1,7 @@
 from apistar import Response, http
 from apistar.backends.sqlalchemy_backend import Session
 
-from cookies.views import create_fortune
+from fortunes.views import create_fortune
 
 
 def load_fortunes(session: Session, file: str):

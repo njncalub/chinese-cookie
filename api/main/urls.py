@@ -1,7 +1,7 @@
 from apistar import Include
 from apistar.handlers import docs_urls, static_urls
 
-from cookies.urls import fortune_routes
+from fortunes.urls import fortune_routes
 
 
 routes = [
