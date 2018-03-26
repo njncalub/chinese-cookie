@@ -6,6 +6,7 @@ from cookies.urls import fortune_routes
 
 routes = [
     Include('/fortunes', fortune_routes),
+    
     Include('/docs', docs_urls),
-    Include('/static', static_urls)
+    Include('/static', static_urls),
 ]
