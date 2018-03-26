@@ -24,7 +24,7 @@ export class FortuneService {
   
   /** GET: all fortunes from the server */
   getFortunes (): Observable<Fortune[]> {
-    const url = `${this.baseApiUrl}/all`;
+    const url = `${this.baseApiUrl}/`;
     return this.http.get<Fortune[]>(url)
       .pipe(
         tap(heroes => this.log(`fetched fortunes`)),
@@ -34,7 +34,7 @@ export class FortuneService {
   
   /** GET: fortune by UUID. Return `undefined` when UUID not found */
   getFortuneNo404<Data>(uuid: string): Observable<Fortune> {
-    const url = `${this.baseApiUrl}/${uuid}/`;
+    const url = `${this.baseApiUrl}/${uuid}`;
     return this.http.get<Fortune[]>(url)
       .pipe(
         map(fortunes => fortunes[0]),
@@ -48,7 +48,7 @@ export class FortuneService {
   
   /** GET: fortune by UUID. Will 404 if UUID not found */
   getFortune(uuid: string): Observable<Fortune> {
-    const url = `${this.baseApiUrl}/${uuid}/`;
+    const url = `${this.baseApiUrl}/${uuid}`;
     return this.http.get<Fortune>(url).pipe(
       tap(f => this.log(`fetched fortune ${f.uuid}`)),
       catchError(this.handleError<Fortune>(`getFortune uuid=${uuid}`))
@@ -57,16 +57,16 @@ export class FortuneService {
   
   /** GET: random fortune.  */
   getRandomFortune(): Observable<Fortune> {
-    const url = `${this.baseApiUrl}/`;
+    const url = `${this.baseApiUrl}/random`;
     return this.http.get<Fortune>(url).pipe(
-      tap(fortune => this.log(`fetched random fortune ${fortune.uuid}`)),
+      tap(fortune => this.log(`fetched random fortune uuid=${fortune.uuid}`)),
       catchError(this.handleError<Fortune>(`getFortune <random>`))
     );
   }
   
   /** PUT: update the fortune on the server */
   updateFortune (fortune: Fortune): Observable<any> {
-    const url = `${this.baseApiUrl}/${fortune.uuid}/?message=${fortune.message}`;
+    const url = `${this.baseApiUrl}/${fortune.uuid}?message=${fortune.message}`;
     return this.http.patch(url, fortune, httpOptions).pipe(
       tap(_ => this.log(`updated fortune uuid=${fortune.uuid}`)),
       catchError(this.handleError<any>('updateFortune'))

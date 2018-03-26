@@ -1,21 +1,30 @@
 button.clear {
+  width: 100px;
   font-family: Arial;
-  background-color: #eee;
+  background-color: #eeeeee;
   border: none;
   padding: 5px 10px;
   border-radius: 4px;
   cursor: pointer;
   cursor: hand;
-  color: #888;
+  color: #888888;
   margin-bottom: 12px;
 }
 button:hover {
   background-color: #cfd8dc;
 }
 button:disabled {
-  background-color: #ccc;
-  color: #aaa;
+  background-color: #cccccc;
+  color: #aaaaaa;
   cursor: auto;
+}
+button#btnChange:enabled {
+  background-color: #a72222;
+  color: #ffffff;
+}
+button#btnSave:enabled {
+  background-color: #1467d2;
+  color: #ffffff;
 }
 
 #txtMessage {
