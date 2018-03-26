@@ -17,7 +17,7 @@ def get_random_fortune(session: Session):
     record = random.choice(queryset)
     data = FortuneSerializer(record)
     
-    return Response(data, status=201)
+    return Response(data, status=200)
 
 def create_fortune(session: Session, message: str):
     """
@@ -26,9 +26,10 @@ def create_fortune(session: Session, message: str):
     
     fortune = Fortune(message=message)
     session.add(fortune)
-    session.flush()  # can also use .commit() here
+    session.commit()
     
-    return {'id': fortune.id, 'message': fortune.message}
+    data = FortuneSerializer(fortune)
+    return Response(data, status=201)
 
 def get_fortune(session: Session, uuid: str):
     """
@@ -41,6 +42,10 @@ def get_fortune(session: Session, uuid: str):
     
     queryset = session.query(Fortune).filter(Fortune.uuid==uuid)
     record = queryset.first()
+    
+    if not record:
+        data = {'message': 'Please select a message.'}
+        return Response(data, status=404)
     
     return FortuneSerializer(record)
 
@@ -59,8 +64,12 @@ def update_fortune(session: Session, uuid: str, message: str):
     
     queryset = session.query(Fortune).filter(Fortune.uuid==uuid)
     record = queryset.first()
-    record.message = message
     
+    if not record:
+        data = {'message': 'Please select a message.'}
+        return Response(data, status=404)
+    
+    record.message = message
     session.commit()
     
     queryset = session.query(Fortune).filter(Fortune.uuid==uuid)

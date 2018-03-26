@@ -10,9 +10,9 @@ from .views import (
 )
 
 fortune_routes = [
-    Route('/', 'GET', get_random_fortune),
-    Route('/{uuid}/', 'GET', get_fortune),
-    Route('/{uuid}/', 'PATCH', update_fortune),
-    Route('/new', 'POST', create_fortune),
-    Route('/all', 'GET', list_fortunes),
+    Route('/', 'GET', list_fortunes),
+    Route('/', 'POST', create_fortune),
+    Route('/{uuid}', 'GET', get_fortune),
+    Route('/{uuid}', 'PATCH', update_fortune),
+    Route('/random', 'GET', get_random_fortune),
 ]

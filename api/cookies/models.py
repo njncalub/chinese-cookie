@@ -4,8 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql import func
 from sqlalchemy import Column, Integer, String, DateTime
 
-
-Base = declarative_base()
+from main.models import Base
 
 
 def generate_uuid():
